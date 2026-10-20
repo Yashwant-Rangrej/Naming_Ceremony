@@ -86,7 +86,7 @@ export const BlessingShower: React.FC<BlessingShowerProps> = ({
           title="Tap to shower flower petals!"
         >
           <img
-            src="/cat.gif"
+            src={`${import.meta.env.BASE_URL}cat.gif`}
             alt="Auspicious Cat"
             className="w-11 h-11 sm:w-14 sm:h-14 object-contain select-none drop-shadow-md group-hover:scale-110 active:scale-90 transition-transform duration-200"
             draggable={false}
