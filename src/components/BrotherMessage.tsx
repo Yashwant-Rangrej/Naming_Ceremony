@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { CEREMONY_DATA } from '../data/ceremony';
 import { Heart } from 'lucide-react';
 import { CornerOrnament, OrnamentalDivider } from './FloralDecoration';
@@ -8,53 +8,53 @@ export const BrotherMessage: React.FC<{ className?: string }> = ({ className = '
   const { elderBrother } = CEREMONY_DATA;
   const prefersReduced = useReducedMotion();
 
-  const stagger = {
+  const stagger: Variants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.13, delayChildren: 0.05 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.05 },
     },
   };
 
-  const item = prefersReduced
-    ? {}
+  const item: Variants = prefersReduced
+    ? { hidden: {}, visible: {} }
     : {
-        hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
+        hidden: { opacity: 0, y: 18, filter: 'blur(2px)' },
         visible: {
           opacity: 1,
           y: 0,
           filter: 'blur(0px)',
-          transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+          transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
         },
       };
 
   return (
     <section id="brother" className={`scroll-mt-24 ${className}`} aria-labelledby="brother-heading">
-      <div className="royal-card-frame bg-gradient-to-b from-[#FFFDFB] via-[#FBF2F4] to-[#FFFDFB] relative overflow-hidden">
-        <CornerOrnament position="top-left" size={40} />
-        <CornerOrnament position="top-right" size={40} />
-        <CornerOrnament position="bottom-left" size={40} />
-        <CornerOrnament position="bottom-right" size={40} />
+      <div className="royal-card-frame bg-gradient-to-b from-[#FFFDFB] via-[#FDF3F5] to-[#FFFDFB] relative overflow-hidden border-[#B08D57]/35 shadow-md">
+        <CornerOrnament position="top-left" size={38} />
+        <CornerOrnament position="top-right" size={38} />
+        <CornerOrnament position="bottom-left" size={38} />
+        <CornerOrnament position="bottom-right" size={38} />
         <div className="royal-inner-border" />
 
-        {/* Soft blush radial glow — purely decorative depth */}
+        {/* Soft blush radial glow */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 0%, rgba(243,221,226,0.55) 0%, transparent 65%)',
+              'radial-gradient(ellipse at 50% 10%, rgba(243,221,226,0.65) 0%, transparent 70%)',
           }}
         />
 
         <motion.div
-          className="relative z-10 max-w-xl mx-auto text-center px-4 py-2"
+          className="relative z-10 max-w-xl mx-auto text-center px-2 sm:px-4 py-2"
           variants={stagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: '-40px' }}
         >
           {/* Tag */}
-          <motion.div variants={item} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3DDE2]/70 border border-[#B08D57]/30 text-xs text-[#81532F] font-medium mb-3">
-            <Heart className="w-3.5 h-3.5 text-[#C58F9C] fill-current" />
+          <motion.div variants={item} className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F3DDE2]/80 border border-[#B08D57]/35 text-xs text-[#81532F] font-semibold mb-2.5 shadow-xs">
+            <Heart className="w-3.5 h-3.5 text-[#C58F9C] fill-current animate-pulse" />
             <span>Pure Sibling Love</span>
           </motion.div>
 
@@ -62,7 +62,7 @@ export const BrotherMessage: React.FC<{ className?: string }> = ({ className = '
           <motion.h3
             variants={item}
             id="brother-heading"
-            className="text-xl sm:text-2xl font-serif text-[#81532F] font-semibold mb-2"
+            className="text-lg sm:text-2xl font-serif text-[#81532F] font-semibold mb-1"
           >
             {elderBrother.roleLabel}
           </motion.h3>
@@ -71,39 +71,46 @@ export const BrotherMessage: React.FC<{ className?: string }> = ({ className = '
             <OrnamentalDivider className="my-2" />
           </motion.div>
 
-          {/* Big Name — pops in */}
+          {/* Big Name */}
           <motion.div
             variants={item}
-            className="my-4"
-            whileInView={{ opacity: 1, scale: 1 }}
+            className="my-3 sm:my-4"
           >
-            <h4 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#81532F] tracking-wide leading-tight">
-              {elderBrother.name}
-            </h4>
-            <span className="text-xs uppercase tracking-widest text-[#B08D57] font-medium mt-1 block">
-              Proud Elder Brother
-            </span>
+            <div className="inline-block relative">
+              <h4 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#81532F] tracking-wide leading-tight gold-gradient-text">
+                {elderBrother.name}
+              </h4>
+              <div className="flex items-center justify-center gap-2 mt-1">
+                <span className="h-px w-6 bg-[#B08D57]/40" />
+                <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#B08D57] font-semibold">
+                  Proud Elder Brother
+                </span>
+                <span className="h-px w-6 bg-[#B08D57]/40" />
+              </div>
+            </div>
           </motion.div>
 
-          {/* Quote block — slides up last */}
+          {/* Quote block */}
           <motion.div
             variants={item}
-            className="relative mt-5 px-6 py-5 rounded-2xl bg-white/70 border border-[#B08D57]/20 shadow-sm"
+            className="relative mt-4 px-5 sm:px-8 py-5 rounded-2xl bg-white/85 border border-[#B08D57]/30 shadow-sm backdrop-blur-xs"
             whileHover={prefersReduced ? {} : { scale: 1.01, transition: { duration: 0.25 } }}
           >
-            <span className="font-serif text-4xl text-[#B08D57]/40 leading-none select-none absolute top-2 left-3">
-              "
+            <span className="font-serif text-4xl sm:text-5xl text-[#B08D57]/35 leading-none select-none absolute top-2 left-3">
+              “
             </span>
-            <p className="font-serif italic text-lg sm:text-xl text-[#6F5A48] leading-relaxed relative z-10 px-3">
+            <p className="font-serif italic text-base sm:text-xl text-[#6F5A48] leading-relaxed relative z-10 px-2 sm:px-4">
               {elderBrother.message}
             </p>
-            <span className="font-serif text-4xl text-[#B08D57]/40 leading-none select-none absolute bottom-1 right-3">
-              "
+            <span className="font-serif text-4xl sm:text-5xl text-[#B08D57]/35 leading-none select-none absolute bottom-1 right-3">
+              ”
             </span>
           </motion.div>
 
-          <motion.p variants={item} className="text-xs text-[#8E7A69] mt-5">
-            Looking forward to welcoming you with joy and an eager smile!
+          <motion.p variants={item} className="text-xs sm:text-sm text-[#8E7A69] mt-4 flex items-center justify-center gap-1.5 font-medium">
+            <span>🌸</span>
+            <span>Looking forward to welcoming you with joy and an eager smile!</span>
+            <span>🌸</span>
           </motion.p>
         </motion.div>
       </div>

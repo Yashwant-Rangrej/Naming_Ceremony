@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 type RevealDirection = 'up' | 'left' | 'right' | 'scale' | 'fade';
 
@@ -12,7 +12,7 @@ interface ScrollRevealProps {
   once?: boolean;
 }
 
-const variants: Record<RevealDirection, { hidden: object; visible: object }> = {
+const variants: Record<RevealDirection, Variants> = {
   up: {
     hidden: { opacity: 0, y: 36, scale: 0.98 },
     visible: { opacity: 1, y: 0, scale: 1 },

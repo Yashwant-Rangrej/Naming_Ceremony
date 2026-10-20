@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants, type TargetAndTransition } from 'framer-motion';
 import { CEREMONY_DATA } from '../data/ceremony';
 import { OrnamentalDivider } from './FloralDecoration';
 import { Heart } from 'lucide-react';
@@ -8,23 +8,23 @@ export const ClosingSection: React.FC<{ className?: string }> = ({ className = '
   const { closing } = CEREMONY_DATA;
   const prefersReduced = useReducedMotion();
 
-  const stagger = {
+  const stagger: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.14, delayChildren: 0.05 } },
   };
 
-  const item = prefersReduced
-    ? {}
+  const item: Variants = prefersReduced
+    ? { hidden: {}, visible: {} }
     : {
         hidden: { opacity: 0, y: 24 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
       };
 
-  const heartPulse = prefersReduced
+  const heartPulse: TargetAndTransition = prefersReduced
     ? {}
     : {
         scale: [1, 1.18, 1],
-        transition: { repeat: Infinity, repeatType: 'loop' as const, duration: 1.5, ease: 'easeInOut' },
+        transition: { repeat: Infinity, repeatType: 'loop', duration: 1.5, ease: 'easeInOut' },
       };
 
   return (

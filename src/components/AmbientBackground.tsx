@@ -76,7 +76,7 @@ export const AmbientBackground: React.FC = () => (
     />
 
     {/* Small top-right twinkle dot cluster */}
-    {[0, 60, 120, 180, 240].map((deg, i) => (
+    {[0, 60, 120, 180, 240].map((_, i) => (
       <div
         key={i}
         className="animate-twinkle absolute rounded-full bg-[#B08D57]"

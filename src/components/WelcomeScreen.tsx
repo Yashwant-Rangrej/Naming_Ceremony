@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MailOpen } from 'lucide-react';
+import { MailOpen, Heart } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { CEREMONY_DATA } from '../data/ceremony';
 import { TraditionalCradle } from './TraditionalCradle';
 import { CornerOrnament, HangingToran, OrnamentalDivider } from './FloralDecoration';
@@ -19,7 +20,18 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const handleOpen = () => {
     if (isOpening || isOpen) return;
     setIsOpening(true);
-    onOpenInvitation();
+
+    // Auspicious blossom explosion when opening!
+    confetti({
+      particleCount: 50,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#F3DDE2', '#C58F9C', '#B08D57', '#E8D6B8', '#FFFFFF'],
+    });
+
+    setTimeout(() => {
+      onOpenInvitation();
+    }, 450);
   };
 
   const containerVariants = {
@@ -27,34 +39,24 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.25,
-        delayChildren: 0.1,
+        staggerChildren: 0.18,
+        delayChildren: 0.05,
       },
     },
     exit: {
       opacity: 0,
       scale: 0.96,
-      filter: 'blur(8px)',
-      transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] as const },
+      filter: 'blur(6px)',
+      transition: { duration: 0.65, ease: [0.4, 0, 0.2, 1] as const },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 22 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
-  const cradleVariants = {
-    hidden: { opacity: 0, scale: 0.88, y: 15 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -71,70 +73,73 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           aria-label="Welcome Invitation Screen"
         >
           {/* Hanging Toran Garland on top */}
-          <div className="absolute top-0 inset-x-0 z-10">
+          <div className="absolute top-0 inset-x-0 z-10 pointer-events-none">
             <HangingToran />
           </div>
 
           {/* Centered Royal Card */}
           <motion.div
-            className="royal-card-frame w-full max-w-xl mx-auto my-auto text-center relative z-20 py-8 sm:py-12 px-6 sm:px-10"
+            className="royal-card-frame w-full max-w-xl mx-auto my-auto text-center relative z-20 py-6 sm:py-10 px-4 sm:px-8 border-[#B08D57]/35 shadow-xl bg-gradient-to-b from-[#FFFFFF] via-[#FFFDFB] to-[#FFF9F3]"
             style={{
               boxShadow: '0 25px 60px -15px rgba(129, 83, 47, 0.2), 0 0 0 1px rgba(176, 141, 87, 0.3)',
             }}
           >
             {/* Corner Ornaments */}
-            <CornerOrnament position="top-left" size={44} />
-            <CornerOrnament position="top-right" size={44} />
-            <CornerOrnament position="bottom-left" size={44} />
-            <CornerOrnament position="bottom-right" size={44} />
+            <CornerOrnament position="top-left" size={42} />
+            <CornerOrnament position="top-right" size={42} />
+            <CornerOrnament position="bottom-left" size={42} />
+            <CornerOrnament position="bottom-right" size={42} />
             <div className="royal-inner-border" />
 
             <div className="relative z-10 flex flex-col items-center">
               {/* Auspicious Invocation */}
-              <motion.div variants={itemVariants} className="mb-2">
-                <span className="font-serif tracking-widest text-xs sm:text-sm font-semibold text-[#B08D57] uppercase">
+              <motion.div variants={itemVariants} className="mb-1.5">
+                <span className="font-serif tracking-widest text-xs sm:text-sm font-bold text-[#B08D57] uppercase">
                   {CEREMONY_DATA.auspiciousInvocation}
                 </span>
               </motion.div>
 
               {/* Traditional Cradle Illustration */}
-              <motion.div variants={cradleVariants} className="my-2 sm:my-3">
-                <TraditionalCradle size={210} />
+              <motion.div variants={itemVariants} className="my-1 sm:my-2">
+                <TraditionalCradle size={195} />
+                <span className="text-[10px] text-[#B08D57]/80 block font-medium -mt-2">
+                  (Tap cradle to gently rock 🌸)
+                </span>
               </motion.div>
 
               {/* Main Heading */}
-              <motion.div variants={itemVariants} className="space-y-1 my-2">
-                <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#81532F] tracking-tight">
+              <motion.div variants={itemVariants} className="space-y-0.5 my-2">
+                <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#81532F] tracking-tight gold-gradient-text leading-tight">
                   {CEREMONY_DATA.babyTitle}
                 </h1>
-                <p className="font-serif italic text-base sm:text-lg text-[#B08D57] font-medium">
+                <p className="font-serif italic text-base sm:text-xl text-[#B08D57] font-semibold">
                   {CEREMONY_DATA.subtitle}
                 </p>
               </motion.div>
 
               <motion.div variants={itemVariants} className="w-full max-w-xs">
-                <OrnamentalDivider className="my-3" />
+                <OrnamentalDivider className="my-2" />
               </motion.div>
 
               {/* Ceremony Subtext */}
-              <motion.div variants={itemVariants} className="mb-5 max-w-md">
+              <motion.div variants={itemVariants} className="mb-4 max-w-md">
                 <p className="text-xs sm:text-sm text-[#6F5A48] leading-relaxed">
-                  Join Krishnendu Habib and family as we celebrate the auspicious Namakarana ceremony of our little angel.
+                  Join Ravikumar, Amruta &amp; Krishnendu Habib and family as we celebrate the auspicious Namakarana ceremony of our little angel.
                 </p>
-                <div className="flex items-center justify-center gap-2 mt-2 text-xs font-semibold text-[#81532F]">
-                  <span>25 October 2026</span>
+                <div className="inline-flex items-center justify-center gap-2 mt-2.5 px-3 py-1 rounded-full bg-[#F3DDE2]/70 border border-[#B08D57]/30 text-xs font-semibold text-[#81532F]">
+                  <span>Sunday, 25 October 2026</span>
                   <span>•</span>
                   <span>Bengaluru, India</span>
                 </div>
               </motion.div>
 
               {/* Prominent Invitation Button */}
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={handleOpen}
                   disabled={isOpening}
-                  className="btn-primary group text-lg sm:text-xl py-3.5 px-8 sm:px-10 shadow-lg relative overflow-hidden"
+                  className="btn-primary group w-full sm:w-auto text-base sm:text-xl py-3.5 px-8 sm:px-10 shadow-lg relative overflow-hidden active:scale-95 transition-transform"
                   aria-label="Open your naming ceremony invitation"
                 >
                   <MailOpen className="w-5 h-5 transition-transform group-hover:scale-110" />
@@ -143,8 +148,9 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               </motion.div>
 
               {/* Subtle hint */}
-              <motion.p variants={itemVariants} className="text-[11px] text-[#8E7A69] mt-4">
-                Click above to reveal the auspicious invitation
+              <motion.p variants={itemVariants} className="text-[11px] text-[#8E7A69] mt-3 flex items-center gap-1 font-medium">
+                <Heart className="w-3 h-3 text-[#C58F9C] fill-current" />
+                <span>Tap above to unfold the sacred ceremony invitation</span>
               </motion.p>
             </div>
           </motion.div>

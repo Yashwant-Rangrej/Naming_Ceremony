@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { InvitationReveal } from './components/InvitationReveal';
 import { PetalsCanvas } from './components/PetalsCanvas';
-import { Navbar } from './components/Navbar';
 import { AmbientBackground } from './components/AmbientBackground';
+import { Navbar } from './components/Navbar';
 
 export function App() {
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
@@ -19,15 +19,10 @@ export function App() {
     }, 400);
   };
 
-  const handleReopenWelcome = () => {
-    setIsInvitationOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    // If user presses Escape on desktop and invitation is open, optionally allow viewing welcome
+    // If user presses Home or Escape, allow scrolling to top
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Home' && isInvitationOpen) {
+      if ((e.key === 'Home' || e.key === 'Escape') && isInvitationOpen) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
@@ -49,10 +44,8 @@ export function App() {
         onOpenInvitation={handleOpenInvitation}
       />
 
-      {/* Header Navigation (Active when invitation is opened) */}
-      {isInvitationOpen && (
-        <Navbar onReopenWelcome={handleReopenWelcome} />
-      )}
+      {/* Header Bar */}
+      {isInvitationOpen && <Navbar />}
 
       {/* Screen 2-8: Animated Invitation Journey */}
       {isInvitationOpen && (

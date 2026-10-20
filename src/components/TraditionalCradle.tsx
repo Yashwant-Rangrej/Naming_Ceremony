@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface TraditionalCradleProps {
   className?: string;
@@ -13,16 +13,25 @@ export const TraditionalCradle: React.FC<TraditionalCradleProps> = ({
   className = "",
   size = 280,
 }) => {
+  const [isTapped, setIsTapped] = useState(false);
+
+  const handleCradleTap = () => {
+    setIsTapped(true);
+    setTimeout(() => setIsTapped(false), 1400);
+  };
+
   return (
     <div
-      className={`relative inline-flex items-center justify-center select-none ${className}`}
+      onClick={handleCradleTap}
+      className={`relative inline-flex items-center justify-center select-none cursor-pointer group active:scale-95 transition-transform duration-200 ${className}`}
       style={{ width: size, height: size * 1.05 }}
       role="img"
-      aria-label="Traditional Indian baby cradle adorned with fresh flowers, golden chains, and brass bells"
+      aria-label="Traditional Indian baby cradle adorned with fresh flowers, golden chains, and brass bells - Tap to gently rock"
+      title="Tap the cradle to gently rock"
     >
       {/* Gentle background radiant glow */}
       <div 
-        className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
+        className={`absolute inset-0 rounded-full blur-2xl transition-opacity duration-500 pointer-events-none ${isTapped ? 'opacity-80 scale-110' : 'opacity-40'}`}
         style={{
           background: 'radial-gradient(circle, #F3DDE2 0%, #E8D6B8 50%, transparent 70%)',
         }}
@@ -31,7 +40,9 @@ export const TraditionalCradle: React.FC<TraditionalCradleProps> = ({
       {/* Cradle SVG with gentle swing animation */}
       <svg
         viewBox="0 0 320 340"
-        className="w-full h-full animate-cradle filter drop-shadow-md"
+        className={`w-full h-full filter drop-shadow-md transition-all duration-300 ${
+          isTapped ? 'animate-cradle-fast' : 'animate-cradle'
+        }`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -200,7 +211,6 @@ export const TraditionalCradle: React.FC<TraditionalCradleProps> = ({
             <circle cx="0" cy="20" r="1.5" fill="#B08D57" />
           </g>
         </g>
-
       </svg>
     </div>
   );

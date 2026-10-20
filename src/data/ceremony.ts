@@ -124,8 +124,7 @@ export const CEREMONY_DATA: CeremonyConfig = {
   },
 
   family: {
-    // IMPORTANT: Not yet provided. Keep empty arrays to prevent inventing information.
-    parents: [],
+    parents: ["Ravikumar Habib", "Amruta Habib"],
     grandparents: [],
     otherMembers: [],
     placeholderNotice:

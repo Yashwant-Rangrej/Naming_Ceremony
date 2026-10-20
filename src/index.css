@@ -258,6 +258,19 @@ input:focus-visible {
   transform-origin: 50% 0%;
 }
 
+@keyframes cradleSwingFast {
+  0% { transform: rotate(-5deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(-1deg); }
+}
+
+.animate-cradle-fast {
+  animation: cradleSwingFast 1.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  transform-origin: 50% 0%;
+}
+
 /* Gentle float */
 @keyframes softFloat {
   0%, 100% {
