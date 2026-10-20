@@ -1,0 +1,342 @@
+@import "tailwindcss";
+
+:root {
+  /* Color Palette - Traditional Indian Elegance */
+  --color-warm-ivory: #FFFAF5;
+  --color-antique-gold: #B08D57;
+  --color-gold-light: #C9A76F;
+  --color-gold-dark: #8E6D38;
+  --color-champagne: #E8D6B8;
+  --color-champagne-light: #F7EFE4;
+  --color-soft-blush: #F3DDE2;
+  --color-blush-light: #FBF2F4;
+  --color-dusty-rose: #C58F9C;
+  --color-deep-rose-brown: #81532F;
+  --color-warm-text-brown: #6F5A48;
+  --color-text-muted: #8E7A69;
+  --color-white: #FFFFFF;
+
+  /* Gradients */
+  --gradient-gold: linear-gradient(135deg, #B08D57 0%, #D8B781 50%, #A07C44 100%);
+  --gradient-gold-subtle: linear-gradient(135deg, rgba(176, 141, 87, 0.15) 0%, rgba(232, 214, 184, 0.4) 50%, rgba(176, 141, 87, 0.15) 100%);
+  --gradient-blush-ivory: linear-gradient(180deg, #FFFAF5 0%, #FBF2F4 50%, #FFFAF5 100%);
+  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFFAF5 100%);
+
+  /* Shadows */
+  --shadow-subtle: 0 4px 20px -2px rgba(129, 83, 47, 0.06);
+  --shadow-medium: 0 12px 32px -4px rgba(129, 83, 47, 0.1), 0 2px 6px -1px rgba(176, 141, 87, 0.08);
+  --shadow-gold: 0 8px 25px -4px rgba(176, 141, 87, 0.25);
+  --shadow-elevation: 0 24px 48px -12px rgba(111, 90, 72, 0.15), 0 0 0 1px rgba(176, 141, 87, 0.18);
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-script: 'Pinyon Script', cursive;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-warm-ivory);
+  color: var(--color-warm-text-brown);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-warm-ivory);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(243, 221, 226, 0.45) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(232, 214, 184, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(255, 250, 245, 0.9) 0%, rgba(255, 250, 245, 0.95) 100%);
+  background-attachment: fixed;
+  color: var(--color-warm-text-brown);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-deep-rose-brown);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-warm-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-champagne);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-antique-gold);
+}
+
+/* Focus styling for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-antique-gold);
+  outline-offset: 3px;
+}
+
+/* Utilities */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #81532F 0%, #B08D57 40%, #8E6D38 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border: 1px solid rgba(176, 141, 87, 0.35);
+}
+
+.gold-border-double {
+  border: 3px double rgba(176, 141, 87, 0.5);
+}
+
+/* Traditional Card Frame */
+.royal-card-frame {
+  position: relative;
+  background: var(--gradient-card);
+  border: 1px solid rgba(176, 141, 87, 0.25);
+  box-shadow: var(--shadow-elevation);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .royal-card-frame {
+    border-radius: 18px;
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .royal-card-frame {
+    padding: 3.5rem 3rem;
+  }
+}
+
+.royal-inner-border {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(176, 141, 87, 0.22);
+  border-radius: 11px;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .royal-inner-border {
+    inset: 10px;
+    border-radius: 12px;
+  }
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-white);
+  background: var(--gradient-gold);
+  border: 1px solid rgba(176, 141, 87, 0.4);
+  border-radius: 9999px;
+  box-shadow: var(--shadow-gold);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(176, 141, 87, 0.4);
+  background: linear-gradient(135deg, #C9A76F 0%, #B08D57 100%);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-deep-rose-brown);
+  background: var(--color-white);
+  border: 1px solid rgba(176, 141, 87, 0.35);
+  border-radius: 9999px;
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-blush-light);
+  border-color: var(--color-antique-gold);
+  transform: translateY(-1px);
+}
+
+/* Cradle gentle swing animation */
+@keyframes cradleSwing {
+  0% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+.animate-cradle {
+  animation: cradleSwing 4.5s ease-in-out infinite;
+  transform-origin: 50% 0%;
+}
+
+/* Gentle float */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: softFloat 4s ease-in-out infinite;
+}
+
+/* Pulse shimmer for decorative dots */
+@keyframes goldenShimmer {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-shimmer {
+  animation: goldenShimmer 3s ease-in-out infinite;
+}
+
+/* Ambient floating orb — background depth effect */
+@keyframes floatOrb {
+  0%   { transform: translateY(0px)   translateX(0px)  scale(1);    opacity: 0.55; }
+  25%  { transform: translateY(-18px) translateX(10px) scale(1.04); opacity: 0.7;  }
+  50%  { transform: translateY(-10px) translateX(-8px) scale(0.97); opacity: 0.6;  }
+  75%  { transform: translateY(-22px) translateX(5px)  scale(1.02); opacity: 0.65; }
+  100% { transform: translateY(0px)   translateX(0px)  scale(1);    opacity: 0.55; }
+}
+
+@keyframes floatOrbReverse {
+  0%   { transform: translateY(0px)   translateX(0px)  scale(1);    opacity: 0.45; }
+  33%  { transform: translateY(14px)  translateX(-12px) scale(1.05); opacity: 0.6; }
+  66%  { transform: translateY(-8px)  translateX(9px)  scale(0.96); opacity: 0.5;  }
+  100% { transform: translateY(0px)   translateX(0px)  scale(1);    opacity: 0.45; }
+}
+
+.animate-orb {
+  animation: floatOrb 9s ease-in-out infinite;
+}
+
+.animate-orb-reverse {
+  animation: floatOrbReverse 12s ease-in-out infinite;
+}
+
+/* Section reveal sweep line */
+@keyframes sweepIn {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* Subtle twinkling glow for decorative dots / petals */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50%       { opacity: 0.85; transform: scale(1.15); }
+}
+
+.animate-twinkle {
+  animation: twinkle 2.8s ease-in-out infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-cradle, .animate-float, .animate-shimmer, .animate-orb, .animate-orb-reverse, .animate-twinkle {
+    animation: none !important;
+  }
+}

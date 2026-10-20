@@ -1,0 +1,155 @@
+/**
+ * Ceremony Configuration - Single Source of Truth
+ *
+ * Update this file to modify any details about the ceremony, family, venue, or media.
+ * Values marked with comments like "To be updated" will gracefully display tasteful placeholders
+ * or conditional sections until provided by the family.
+ */
+
+export interface FamilyGroup {
+  relationship: string;
+  members: string[];
+}
+
+export interface GalleryPhoto {
+  id: string;
+  url: string;
+  caption: string;
+  altText: string;
+}
+
+export interface CeremonyConfig {
+  /** Display title for the baby girl */
+  babyTitle: string;
+  /** Subtitle / poetic phrase */
+  subtitle: string;
+  /** Formal event title */
+  ceremonyTitle: string;
+  /** Auspicious Sanskrit / Hindi phrase (e.g. Om Shree Ganeshay Namah / Namakarana) */
+  auspiciousInvocation: string;
+  /** Heartfelt introduction paragraph */
+  invitationNote: string;
+
+  /** Elder brother's special section */
+  elderBrother: {
+    name: string;
+    message: string;
+    roleLabel: string;
+  };
+
+  /** Ceremony date & time details */
+  event: {
+    date: string; // ISO date format YYYY-MM-DD
+    day: string;
+    displayDate: string;
+    time: string;
+    displayTime: string;
+    timezone: string; // e.g. "Asia/Kolkata"
+    isoDateTime: string; // ISO 8601 with timezone offset
+    calendarDurationHours: number; // Configurable duration for .ics download
+  };
+
+  /** Venue information */
+  venue: {
+    city: string;
+    stateCountry: string;
+    name: string | null; // Leave null or "" until venue is finalized
+    address: string | null; // Leave null or "" until address is finalized
+    googleMapsUrl: string | null; // Leave null until available
+    placeholderNotice: string;
+  };
+
+  /** Family members extending the invitation */
+  family: {
+    parents: string[]; // Leave empty array [] until provided
+    grandparents: string[]; // Leave empty array [] until provided
+    otherMembers: FamilyGroup[]; // Configurable groups
+    placeholderNotice: string;
+  };
+
+  /** Photo gallery items */
+  gallery: {
+    photos: GalleryPhoto[]; // Leave empty [] until family photos are provided
+    placeholderMessage: string;
+  };
+
+  /** Optional background music */
+  music: {
+    audioUrl: string | null; // e.g. "/audio/shehnai-melody.mp3", leave null if none
+    title: string;
+  };
+
+  /** Closing message */
+  closing: {
+    title: string;
+    message: string;
+    signature: string;
+  };
+}
+
+export const CEREMONY_DATA: CeremonyConfig = {
+  babyTitle: "A Little Princess",
+  subtitle: "A Beautiful Name, A Lifetime of Love",
+  ceremonyTitle: "Baby Girl Naming Ceremony",
+  auspiciousInvocation: "॥ श्री गणेशाय नमः ॥",
+  invitationNote:
+    "With the blessings of our elders and the grace of the Almighty, we warmly invite you to the auspicious Namakarana (Naming Ceremony) of our precious little baby girl. As we whisper her sacred name for the very first time, we seek your heartfelt love, blessings, and warm presence to illuminate her path ahead.",
+
+  elderBrother: {
+    name: "Krishnendu Habib",
+    roleLabel: "A Special Invitation From Her Elder Brother",
+    message:
+      "I've been blessed with a little sister, and now our family has another reason to smile. Please join us to celebrate her special day!",
+  },
+
+  event: {
+    date: "2026-10-25",
+    day: "Sunday",
+    displayDate: "25 October 2026",
+    time: "12:00 PM",
+    displayTime: "12:00 PM",
+    timezone: "Asia/Kolkata",
+    // Source of truth: 25 October 2026 at 12:00 PM Asia/Kolkata (+05:30)
+    isoDateTime: "2026-10-25T12:00:00+05:30",
+    calendarDurationHours: 2,
+  },
+
+  venue: {
+    city: "Bengaluru",
+    stateCountry: "Karnataka, India",
+    name: "Ramanna Gardens, BEL Layout",
+    address: "Vidyaranyapura, Bengaluru, Karnataka 560097",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=13.0654760,77.5555950",
+    placeholderNotice: "Tap 'Get Directions' below to navigate directly to the ceremony.",
+  },
+
+  family: {
+    // IMPORTANT: Not yet provided. Keep empty arrays to prevent inventing information.
+    parents: [],
+    grandparents: [],
+    otherMembers: [],
+    placeholderNotice:
+      "A warm welcome to all our cherished family, friends, and loved ones.",
+  },
+
+  gallery: {
+    // Photos to be supplied later. Structure is fully ready for gallery photos.
+    photos: [],
+    placeholderMessage:
+      "Precious moments and ceremony glimpses will be cherished and shared here soon.",
+  },
+
+  music: {
+    // Optional background music. Leave null if not provided.
+    // Audio synthesizer fallback or audio file will play only upon explicit user tap.
+    audioUrl: null,
+    title: "Traditional Auspicious Melody",
+  },
+
+  closing: {
+    title: "With Love & Blessings",
+    message:
+      "With love and blessings, our family warmly invites you to share in this precious occasion. Your presence will make our celebration even more special.",
+    signature: "Warm Regards,\nKrishnendu Habib & Family",
+  },
+};
