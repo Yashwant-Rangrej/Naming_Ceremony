@@ -55,10 +55,6 @@ export const Countdown: React.FC<{ className?: string }> = ({ className = "" }) 
           </div>
         ))}
       </div>
-
-      <p className="text-[11px] text-[#8E7A69] mt-2.5">
-        Time calculated in India Standard Time ({CEREMONY_DATA.event.timezone})
-      </p>
     </div>
   );
 };
