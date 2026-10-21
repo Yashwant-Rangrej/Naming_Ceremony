@@ -124,7 +124,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               {/* Ceremony Subtext */}
               <motion.div variants={itemVariants} className="mb-4 max-w-md">
                 <p className="text-xs sm:text-sm text-[#6F5A48] leading-relaxed">
-                  Join Ravikumar, Amruta &amp; Krishnendu Habib and family as we celebrate the auspicious Namakarana ceremony of our little angel.
+                  Join Ravikumar &amp; Amruta and family as we celebrate the auspicious Namakarana ceremony of our little angel.
                 </p>
                 <div className="inline-flex items-center justify-center gap-2 mt-2.5 px-3 py-1 rounded-full bg-[#F3DDE2]/70 border border-[#B08D57]/30 text-xs font-semibold text-[#81532F]">
                   <span>Sunday, 25 October 2026</span>
