@@ -129,7 +129,7 @@ export const CEREMONY_DATA: CeremonyConfig = {
 
   family: {
     parents: ["Ravikumar Habib", "Amruta Habib"],
-    grandparents: [],
+    grandparents: ["Vishwanathsa Habib", "Laxmi Habib"],
     otherMembers: [],
     placeholderNotice:
       "A warm welcome to all our cherished family, friends, and loved ones.",
