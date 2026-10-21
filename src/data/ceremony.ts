@@ -107,11 +107,11 @@ export const CEREMONY_DATA: CeremonyConfig = {
     date: "2026-10-25",
     day: "Sunday",
     displayDate: "25 October 2026",
-    time: "12:00 PM",
-    displayTime: "12:00 PM",
+    time: "11:45 AM",
+    displayTime: "11:45 AM",
     timezone: "Asia/Kolkata",
-    // Source of truth: 25 October 2026 at 12:00 PM Asia/Kolkata (+05:30)
-    isoDateTime: "2026-10-25T12:00:00+05:30",
+    // Source of truth: 25 October 2026 at 11:45 AM Asia/Kolkata (+05:30)
+    isoDateTime: "2026-10-25T11:45:00+05:30",
     calendarDurationHours: 2,
   },
 

@@ -24,12 +24,11 @@ export function handleSmartAddToCalendar(): void {
 export function addToGoogleCalendar(): void {
   const { event, babyTitle, elderBrother, venue } = CEREMONY_DATA;
 
-  // Format date-time for UTC iCalendar format
-  // 2026-10-25 12:00 PM IST is 2026-10-25 06:30 AM UTC
-  const startDateUtc = '20261025T063000Z';
+  // 2026-10-25 11:45 AM IST is 2026-10-25 06:15 AM UTC
+  const startDateUtc = '20261025T061500Z';
   const durationHours = event.calendarDurationHours || 2;
   const endHourUtc = 6 + durationHours;
-  const endDateUtc = `20261025T0${endHourUtc}3000Z`;
+  const endDateUtc = `20261025T0${endHourUtc}1500Z`;
 
   const locationStr = venue.name && venue.address
     ? `${venue.name}, ${venue.address}`
@@ -55,10 +54,10 @@ export function addToGoogleCalendar(): void {
 export function downloadCalendarEvent(): void {
   const { event, babyTitle, elderBrother, venue } = CEREMONY_DATA;
 
-  const startDateUtc = '20261025T063000Z';
+  const startDateUtc = '20261025T061500Z';
   const durationHours = event.calendarDurationHours || 2;
   const endHourUtc = 6 + durationHours;
-  const endDateUtc = `20261025T0${endHourUtc}3000Z`;
+  const endDateUtc = `20261025T0${endHourUtc}1500Z`;
 
   const locationStr = venue.name && venue.address
     ? `${venue.name}, ${venue.address}`

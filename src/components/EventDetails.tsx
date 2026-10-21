@@ -24,8 +24,8 @@ export const EventDetails: React.FC<{ className?: string }> = ({ className = '' 
       icon: Clock,
       label: 'Muhurtham',
       shortLabel: 'Muhurtham',
-      primary: '12:00 PM',
-      shortPrimary: '12:00 PM',
+      primary: event.displayTime,
+      shortPrimary: event.displayTime,
       sub: 'Auspicious Timing',
       shortSub: 'Auspicious',
     },
@@ -87,10 +87,10 @@ export const EventDetails: React.FC<{ className?: string }> = ({ className = '' 
                 {label === 'Muhurtham' ? (
                   <div className="flex items-baseline justify-center mt-1 leading-tight w-full">
                     <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-[#81532F] [font-variant-numeric:lining-nums]">
-                      12:00
+                      11:45
                     </span>
                     <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#81532F]/80 ml-1">
-                      PM
+                      AM
                     </span>
                   </div>
                 ) : (
