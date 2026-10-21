@@ -77,7 +77,7 @@ export const BlessingShower: React.FC<BlessingShowerProps> = ({
       >
         {/* Playful Cat GIF resting atop the button */}
         <div
-          className="relative pr-2 -mb-1 pointer-events-auto cursor-pointer group"
+          className="relative pr-2 -mb-2 pointer-events-auto cursor-pointer group flex items-end justify-end"
           onClick={triggerShower}
           role="button"
           tabIndex={0}
@@ -88,7 +88,7 @@ export const BlessingShower: React.FC<BlessingShowerProps> = ({
           <img
             src={`${import.meta.env.BASE_URL}cat.gif`}
             alt="Auspicious Cat"
-            className="w-11 h-11 sm:w-14 sm:h-14 object-contain select-none drop-shadow-md group-hover:scale-110 active:scale-90 transition-transform duration-200"
+            className="w-20 h-20 sm:w-28 sm:h-28 object-contain select-none drop-shadow-lg group-hover:scale-110 active:scale-95 transition-transform duration-200"
             draggable={false}
           />
         </div>
