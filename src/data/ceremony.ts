@@ -55,6 +55,7 @@ export interface CeremonyConfig {
     stateCountry: string;
     name: string | null; // Leave null or "" until venue is finalized
     address: string | null; // Leave null or "" until address is finalized
+    copyAddress?: string; // Formatted address string specifically for one-tap copy
     googleMapsUrl: string | null; // Leave null until available
     placeholderNotice: string;
   };
@@ -117,8 +118,11 @@ export const CEREMONY_DATA: CeremonyConfig = {
   venue: {
     city: "Bengaluru",
     stateCountry: "Karnataka, India",
-    name: "Ramanna Gardens, BEL Layout",
-    address: "Vidyaranyapura, Bengaluru, Karnataka 560097",
+    name: "Ramanna Gardens",
+    address:
+      "Door No:15, Ground Floor, 2nd Main Road, 5th Cross Ramanna Garden, Behind Mitra Apartment, Chamundeshwari Layout, Vidyaranyapura Main Road, Bengaluru - 560097",
+    copyAddress:
+      "*Ravikumar Habib*\nDoor No:15,\nGround Floor,\n2nd Main Road,\n5th Cross Ramanna Garden,\nBehind Mitra Apartment,\nChamundeshwari Layout, Vidyaranyapura Main Road,\nBengalore: 560097\nKarnataka",
     googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=13.0654760,77.5555950",
     placeholderNotice: "Tap 'Get Directions' below to navigate directly to the ceremony.",
   },

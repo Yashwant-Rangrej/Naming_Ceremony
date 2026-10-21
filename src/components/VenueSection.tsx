@@ -8,15 +8,32 @@ export const VenueSection: React.FC<{ className?: string }> = ({ className = '' 
   const [copied, setCopied] = useState(false);
   const hasDirectionsUrl = Boolean(venue.googleMapsUrl && venue.googleMapsUrl.trim().length > 0);
 
-  const fullAddress = `${venue.name}, ${venue.address}, ${venue.city}, ${venue.stateCountry}`;
+  const copyAddressText =
+    venue.copyAddress ||
+    `*Ravikumar Habib*\nDoor No:15,\nGround Floor,\n2nd Main Road,\n5th Cross Ramanna Garden,\nBehind Mitra Apartment,\nChamundeshwari Layout, Vidyaranyapura Main Road,\nBengalore: 560097\nKarnataka`;
 
   const handleCopyAddress = async () => {
     try {
-      await navigator.clipboard.writeText(fullAddress);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(copyAddressText);
+      } else {
+        throw new Error('Clipboard API not available');
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
-      // Fallback
+      // Robust Fallback for all environments
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = copyAddressText;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      } catch {}
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     }
