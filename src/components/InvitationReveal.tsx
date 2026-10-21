@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useReducedMotion, AnimatePresence, type Variants } from 'framer-motion';
 import { CEREMONY_DATA } from '../data/ceremony';
 import { CornerOrnament, HangingToran, OrnamentalDivider } from './FloralDecoration';
 import { BrotherMessage } from './BrotherMessage';
@@ -7,7 +7,7 @@ import { EventDetails } from './EventDetails';
 import { VenueSection } from './VenueSection';
 import { BlessingShower } from './BlessingShower';
 import { ScrollReveal } from './ScrollReveal';
-import { Heart } from 'lucide-react';
+import { Heart, ChevronDown } from 'lucide-react';
 
 interface InvitationRevealProps {
   className?: string;
@@ -44,6 +44,17 @@ const SectionSeparator: React.FC = () => (
 
 export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = '' }) => {
   const prefersReducedMotion = useReducedMotion();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 60) {
+        setHasScrolled(true);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const cardEntrance: Variants = {
     hidden: { opacity: 0, y: 35, scale: 0.97 },
@@ -99,10 +110,17 @@ export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = 
 
         <div className="relative z-10 text-center max-w-2xl mx-auto py-2 sm:py-4 px-2 sm:px-4">
           {/* Auspicious invocation */}
-          <motion.div variants={inCardItem} className="mb-2">
-            <span className="font-serif tracking-widest text-xs sm:text-sm font-bold text-[#B08D57] uppercase block mb-1">
-              {CEREMONY_DATA.auspiciousInvocation}
-            </span>
+          <motion.div variants={inCardItem} className="mb-2 text-center">
+            <div className="flex flex-col items-center gap-0.5 mb-2">
+              {(CEREMONY_DATA.auspiciousInvocations || [CEREMONY_DATA.auspiciousInvocation]).map((text, idx) => (
+                <span
+                  key={idx}
+                  className="font-serif tracking-widest text-[11px] sm:text-xs font-bold text-[#B08D57] uppercase leading-tight"
+                >
+                  {text}
+                </span>
+              ))}
+            </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F3DDE2]/75 border border-[#B08D57]/30 text-[11px] sm:text-xs font-semibold text-[#81532F] shadow-xs">
               <span>A Sacred Namakarana Celebration</span>
             </div>
@@ -155,10 +173,19 @@ export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = 
             variants={inCardItem}
             className="my-4 sm:my-6 p-4 sm:p-7 rounded-2xl bg-white/85 border border-[#B08D57]/30 shadow-xs relative text-center"
           >
-            <p className="font-serif text-base sm:text-xl text-[#6F5A48] leading-relaxed">
-              {CEREMONY_DATA.invitationNote}
-            </p>
-            <div className="mt-3 flex items-center justify-center gap-2 text-xs font-semibold text-[#81532F]">
+            <div className="font-serif text-base sm:text-xl text-[#6F5A48] leading-relaxed space-y-3">
+              <p>
+                With hearts overflowing with joy and gratitude to the Almighty. We,{' '}
+                <strong className="font-bold text-[#81532F]">
+                  Smt. Amruta Ravikumar Habib &amp; Shri Ravikumar V Habib
+                </strong>
+                , the happiest parents, cordially invite you to celebrate the auspicious Namakarana Ceremony of our precious little daughter, the greatest blessing of our lives.
+              </p>
+              <p>
+                Your presence, love, and blessings will make this cherished moment even more special as we celebrate the beautiful beginning of her journey.
+              </p>
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-2 text-xs font-semibold text-[#81532F]">
               <Heart className="w-3.5 h-3.5 text-[#C58F9C] fill-current" />
               <span>With Love &amp; Blessings, The Habib Family</span>
               <Heart className="w-3.5 h-3.5 text-[#C58F9C] fill-current" />
@@ -168,6 +195,27 @@ export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = 
           {/* Blessing Button inside first card */}
           <motion.div variants={inCardItem} className="flex justify-center mt-4">
             <BlessingShower />
+          </motion.div>
+
+          {/* Prominent Scroll to Explore prompt */}
+          <motion.div
+            variants={inCardItem}
+            className="mt-6 pt-3.5 border-t border-[#B08D57]/20 flex flex-col items-center justify-center cursor-pointer group"
+            onClick={() => {
+              document.getElementById('brother')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-[#F3DDE2]/90 via-[#FFF9F3] to-[#F3DDE2]/90 border border-[#B08D57]/40 shadow-xs hover:shadow-md transition-all group-hover:scale-105 active:scale-95">
+              <span className="text-xs sm:text-sm font-serif font-bold text-[#81532F]">
+                Scroll down for Brother's Wish, Date &amp; Venue
+              </span>
+              <ChevronDown className="w-4 h-4 text-[#81532F] animate-bounce" />
+            </div>
+            <p className="text-[11px] text-[#8E7A69] mt-1.5 flex items-center gap-1 font-serif italic">
+              <span>🌸</span>
+              <span>Tap above or scroll to explore more details</span>
+              <span>🌸</span>
+            </p>
           </motion.div>
         </div>
       </motion.article>
@@ -195,6 +243,33 @@ export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = 
 
       {/* Floating Blessing Action Button & Cat GIF */}
       <BlessingShower variant="floating" />
+
+      {/* Floating Bottom Scroll Hint Pill — auto-hides once user scrolls */}
+      <AnimatePresence>
+        {!hasScrolled && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 pointer-events-auto"
+          >
+            <button
+              type="button"
+              onClick={() => {
+                document.getElementById('brother')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="flex items-center gap-2 py-2 px-4 rounded-full bg-[#81532F]/95 hover:bg-[#81532F] text-white shadow-xl border border-[#B08D57]/60 backdrop-blur-md active:scale-95 transition-transform"
+              aria-label="Scroll down to explore ceremony details"
+            >
+              <span className="text-xs font-semibold tracking-wide">
+                Scroll down to explore
+              </span>
+              <ChevronDown className="w-3.5 h-3.5 animate-bounce text-[#F3DDE2]" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

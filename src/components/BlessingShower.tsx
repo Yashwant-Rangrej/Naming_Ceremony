@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart } from 'lucide-react';
+import { playBlasterSound } from '../utils/soundEffects';
 
 interface BlessingShowerProps {
   className?: string;
@@ -22,6 +23,9 @@ export const BlessingShower: React.FC<BlessingShowerProps> = ({
   const [justBlessed, setJustBlessed] = useState(false);
 
   const triggerShower = () => {
+    // Play blaster sound for the petal cannon burst
+    playBlasterSound();
+
     // Auspicious ceremony colors: blush pink, antique gold, champagne, rose
     const colors = ['#F3DDE2', '#C58F9C', '#B08D57', '#E8D6B8', '#FFFFFF', '#F9D5E5'];
 

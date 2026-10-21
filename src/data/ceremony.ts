@@ -27,6 +27,8 @@ export interface CeremonyConfig {
   ceremonyTitle: string;
   /** Auspicious Sanskrit / Hindi phrase (e.g. Om Shree Ganeshay Namah / Namakarana) */
   auspiciousInvocation: string;
+  /** Optional list of multiple auspicious invocations */
+  auspiciousInvocations?: string[];
   /** Heartfelt introduction paragraph */
   invitationNote: string;
 
@@ -92,9 +94,13 @@ export const CEREMONY_DATA: CeremonyConfig = {
   babyTitle: "A Little Princess",
   subtitle: "A Beautiful Name, A Lifetime of Love",
   ceremonyTitle: "Baby Girl Naming Ceremony",
-  auspiciousInvocation: "॥ श्री गणेशाय नमः ॥",
+  auspiciousInvocation: "॥ Sri Ganeshaya Namah ॥ • ॥ Sri Mailaralingeshwara Prasanna ॥",
+  auspiciousInvocations: [
+    "॥ Sri Ganeshaya Namah ॥",
+    "॥ Sri Mailaralingeshwara Prasanna ॥",
+  ],
   invitationNote:
-    "With the blessings of our elders and the grace of the Almighty, we warmly invite you to the auspicious Namakarana (Naming Ceremony) of our precious little baby girl. As we whisper her sacred name for the very first time, we seek your heartfelt love, blessings, and warm presence to illuminate her path ahead.",
+    "With hearts overflowing with joy and gratitude to the Almighty. We, Smt. Amruta Ravikumar Habib & Shri Ravikumar V Habib, the happiest parents, cordially invite you to celebrate the auspicious Namakarana Ceremony of our precious little daughter, the greatest blessing of our lives.\n\nYour presence, love, and blessings will make this cherished moment even more special as we celebrate the beautiful beginning of her journey.",
 
   elderBrother: {
     name: "Krishnendu Habib",
