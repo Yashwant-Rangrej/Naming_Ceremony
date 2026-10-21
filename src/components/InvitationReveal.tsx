@@ -4,7 +4,6 @@ import { CEREMONY_DATA } from '../data/ceremony';
 import { CornerOrnament, HangingToran, OrnamentalDivider } from './FloralDecoration';
 import { BrotherMessage } from './BrotherMessage';
 import { EventDetails } from './EventDetails';
-import { FamilySection } from './FamilySection';
 import { VenueSection } from './VenueSection';
 import { BlessingShower } from './BlessingShower';
 import { ScrollReveal } from './ScrollReveal';
@@ -192,13 +191,6 @@ export const InvitationReveal: React.FC<InvitationRevealProps> = ({ className = 
       {/* ── SCREEN 4: Venue & Directions ─────────────────────────────────── */}
       <SectionWrap direction="right">
         <VenueSection />
-      </SectionWrap>
-
-      <SectionSeparator />
-
-      {/* ── SCREEN 5: Family Invitation ─────────────────────────────────── */}
-      <SectionWrap direction="up" delay={0.05}>
-        <FamilySection />
       </SectionWrap>
 
       {/* Floating Blessing Action Button & Cat GIF */}
